@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  mariadb:
+   image: mariadb:latest
+   restart: always
+   volumes:
+    - ./db:/var/lib/mariadb
+   environment:
+    MYSQL_DATABASE: test
+    MYSQL_ROOT_PASSWORD: sample
+    MYSQL_USER: basic
+    MYSQL_PASSWORD: sample
+   ports:
+   - "3306:3306"   
+
+  adminer:
+   image: adminer
+   restart: always
+   depends_on: 
+     - mariadb
+   ports:
+     - 8080:8080
